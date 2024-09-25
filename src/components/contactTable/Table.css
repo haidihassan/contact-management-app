@@ -3,8 +3,8 @@ table {
   width: 90%;
   border-collapse: collapse;
   margin-top: 20px;
-  margin-left: auto;  /* Automatically set left margin */
-  margin-right: auto; /* Automatically set right margin */
+  margin-left: auto;  
+  margin-right: auto; 
 }
   
   th, td {
@@ -18,10 +18,10 @@ table {
   }
   
   button {
-    color: black; /* Set the button text color to black */
-    margin-left: 4px; /* Shift the button slightly to the right */
-    border: none; /* Optional: remove button border */
-    cursor: pointer; /* Change cursor to pointer on hover */
+    color: black; 
+    margin-left: 4px; 
+    border: none; 
+    cursor: pointer; 
   }
   .text{
     justify-content: center;
