@@ -18,18 +18,23 @@ const Table = ({ contacts, handleDelete, onContactClick }) => {
         <tbody>
           {contacts.length === 0 ? (
             <tr>
-              <td colSpan="6" style={{ textAlign: "center" , color: 'grey' }}>
+              <td colSpan="6" style={{ textAlign: "center", color: "grey" }}>
                 No contacts available.
               </td>
             </tr>
           ) : (
             contacts.map((contact) => (
-              <tr
-                key={contact.id}
-                onClick={() => onContactClick(contact)}
-                style={{ cursor: "pointer" }}
-              >
-                <td style={{ textDecoration: 'underline' }}>{contact.name}</td>
+              <tr key={contact.id}>
+                <td
+                  onClick={() => onContactClick(contact)}
+                  style={{
+                    textDecoration: "underline",
+                    color: "palevioletred",
+                    cursor: "pointer",
+                  }}
+                >
+                  {contact.name}
+                </td>
                 <td>
                   <span className="tooltip">
                     {contact.email}
@@ -42,11 +47,10 @@ const Table = ({ contacts, handleDelete, onContactClick }) => {
                 <td>
                   <button
                     onClick={(e) => {
-                      e.stopPropagation(); 
+                      e.stopPropagation();
                       handleDelete(contact.id);
                     }}
-                    style={{color: 'black' }}
-
+                    style={{ color: "black" }}
                   >
                     Delete
                   </button>
