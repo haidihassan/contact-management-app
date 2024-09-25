@@ -29,8 +29,7 @@ const Table = ({ contacts, handleDelete, onContactClick }) => {
                 onClick={() => onContactClick(contact)}
                 style={{ cursor: "pointer" }}
               >
-                {" "}
-                <td>{contact.name}</td>
+                <td style={{ textDecoration: 'underline',color:'darkblue' }}>{contact.name}</td>
                 <td>
                   <span className="tooltip">
                     {contact.email}
