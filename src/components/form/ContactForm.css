@@ -15,7 +15,7 @@ form {
   label {
     display: block;
     font-weight: bold;
-    margin-bottom: 5px;
+    margin-bottom: 3px;
   }
   
   input, select, textarea {
@@ -25,6 +25,7 @@ form {
     margin: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
+    transition: all 0.2s ease;
   }
   
   
@@ -60,6 +61,7 @@ form {
   color: red;
   margin-left: 11px; 
   margin-top: 1px; 
+  font-size: smaller;
 }
 
 
