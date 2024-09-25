@@ -18,7 +18,7 @@ const Table = ({ contacts, handleDelete, onContactClick }) => {
         <tbody>
           {contacts.length === 0 ? (
             <tr>
-              <td colSpan="6" style={{ textAlign: "center" }}>
+              <td colSpan="6" style={{ textAlign: "center" , color: 'grey' }}>
                 No contacts available.
               </td>
             </tr>
@@ -29,7 +29,7 @@ const Table = ({ contacts, handleDelete, onContactClick }) => {
                 onClick={() => onContactClick(contact)}
                 style={{ cursor: "pointer" }}
               >
-                <td style={{ textDecoration: 'underline',color:'darkblue' }}>{contact.name}</td>
+                <td style={{ textDecoration: 'underline' }}>{contact.name}</td>
                 <td>
                   <span className="tooltip">
                     {contact.email}
@@ -45,6 +45,8 @@ const Table = ({ contacts, handleDelete, onContactClick }) => {
                       e.stopPropagation(); 
                       handleDelete(contact.id);
                     }}
+                    style={{color: 'black' }}
+
                   >
                     Delete
                   </button>

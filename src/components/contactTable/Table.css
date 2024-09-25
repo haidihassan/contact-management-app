@@ -1,9 +1,11 @@
 
 table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-  }
+  width: 90%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  margin-left: auto;  /* Automatically set left margin */
+  margin-right: auto; /* Automatically set right margin */
+}
   
   th, td {
     border: 1px solid #ccc;
@@ -16,7 +18,10 @@ table {
   }
   
   button {
-    margin-right: 5px;
+    color: black; /* Set the button text color to black */
+    margin-left: 4px; /* Shift the button slightly to the right */
+    border: none; /* Optional: remove button border */
+    cursor: pointer; /* Change cursor to pointer on hover */
   }
   .text{
     justify-content: center;
@@ -49,4 +54,4 @@ table {
     visibility: visible;
     opacity: 1;
   }
-  
+ 
