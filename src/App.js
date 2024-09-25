@@ -1,25 +1,61 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import ContactForm from "./components/form/ContactForm";
+import SearchBar from "./components/searchBar/SearchBar";
+import useForm from "./hooks/useForm";
+import "./styles.css";
+import ContactTable from "./components/contactTable/Table";
+import ContactPopup from "./components/popUp/ContactPopup";
+import NotificationPopup from "./components/pop/NotificationPopup";
 
-function App() {
+
+const App = () => {
+  const [currentContact, setCurrentContact] = useState(null);
+  const [notification, setNotification] = useState(null);
+
+  const [searchQuery, setSearchQuery] = useState("");
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+
+  const { contacts, addContact, handleDelete } = useForm(setNotification);
+
+  const handleSearch = (query) => {
+    setSearchQuery(query);
+  };
+
+  const filteredContacts = contacts.filter((contact) =>
+    contact.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  const onContactClick = (contact) => {
+    setCurrentContact(contact);
+    setIsPopupOpen(true);
+  };
+
+  const handleClosePopup = () => {
+    setIsPopupOpen(false);
+    setCurrentContact(null);
+  };
+
+  const handleCloseNotification = () => {
+    setNotification(null);
+  };
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Contact Management</h1>
+      <ContactForm addContact={addContact} />
+      <SearchBar onSearch={handleSearch} />
+      <ContactTable
+        contacts={filteredContacts}
+        handleDelete={handleDelete}
+        onContactClick={onContactClick}
+      />
+      {isPopupOpen && (
+        <ContactPopup contact={currentContact} onClose={handleClosePopup} />
+      )}
+      {notification && (
+        <NotificationPopup message={notification} onClose={handleCloseNotification} />
+      )}
     </div>
   );
-}
+};
 
 export default App;

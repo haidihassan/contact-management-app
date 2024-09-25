@@ -1,0 +1,10 @@
+src/styles.css
+.App {
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .App h1 {
+    text-align: center; 
+  }
