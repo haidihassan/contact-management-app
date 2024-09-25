@@ -1,5 +1,5 @@
 import React from "react";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form, Field } from "formik";
 import { contactFormValidationSchema } from "./validationSchemas"; 
 import "./ContactForm.css";
 
@@ -23,23 +23,50 @@ const ContactForm = ({ addContact, currentContact }) => {
           resetForm();
         }}
       >
-        {() => (
+        {({ errors, touched }) => (
           <Form>
-            <Field type="text" name="name" placeholder="Name" />
-            <ErrorMessage name="name" component="div" className="error" />
+            <Field
+              type="text"
+              name="name"
+              placeholder="Name"
+              className={touched.name && errors.name ? 'error-border' : ''}
+            />
+            {touched.name && errors.name && (
+              <div className="error-message">{errors.name}</div>
+            )}
 
-            <Field type="email" name="email" placeholder="Email" />
-            <ErrorMessage name="email" component="div" className="error" />
+            <Field
+              type="email"
+              name="email"
+              placeholder="Email"
+              className={touched.email && errors.email ? 'error-border' : ''}
+            />
+            {touched.email && errors.email && (
+              <div className="error-message">{errors.email}</div>
+            )}
 
-            <Field as="select" name="contactType">
+            <Field
+              as="select"
+              name="contactType"
+              className={touched.contactType && errors.contactType ? 'error-border' : ''}
+            >
               <option value="" label="Select contact type" />
               <option value="Personal" label="Personal" />
               <option value="Business" label="Business" />
             </Field>
-            <ErrorMessage name="contactType" component="div" className="error" />
+            {touched.contactType && errors.contactType && (
+              <div className="error-message">{errors.contactType}</div>
+            )}
 
-            <Field type="text" name="jobTitle" placeholder="Job Title" />
-            <ErrorMessage name="jobTitle" component="div" className="error" />
+            <Field
+              type="text"
+              name="jobTitle"
+              placeholder="Job Title"
+              className={touched.jobTitle && errors.jobTitle ? 'error-border' : ''}
+            />
+            {touched.jobTitle && errors.jobTitle && (
+              <div className="error-message">{errors.jobTitle}</div>
+            )}
 
             <Field as="textarea" name="notes" placeholder="Notes" />
 

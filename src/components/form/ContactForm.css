@@ -47,4 +47,20 @@ form {
   button:hover {
     background-color:lightpink;
   }
+
+.contact-form-card {
+  padding: 0; 
+}
+
+.error-border {
+  border: 1px solid red; 
+}
+
+.error-message {
+  color: red;
+  margin-left: 11px; 
+  margin-top: 1px; 
+}
+
+
   
