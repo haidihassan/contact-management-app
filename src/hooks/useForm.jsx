@@ -24,7 +24,6 @@ const useForm = (setNotification) => {
         localStorage.setItem("contacts", JSON.stringify(updatedContacts));
         return updatedContacts;
       });
-      setNotification("Contact updated successfully!");
     } else {
       contact.id = Date.now();
       setContacts((prevContacts) => {
@@ -41,7 +40,6 @@ const useForm = (setNotification) => {
     setContacts((prevContacts) => {
       const updatedContacts = prevContacts.filter((c) => c.id !== id);
 
-      // Update local storage after deletion
       localStorage.setItem("contacts", JSON.stringify(updatedContacts));
       return updatedContacts;
     });

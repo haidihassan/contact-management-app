@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import "./Popup.css";
+import { Button } from "@mui/material";
 
 const ContactPopup = ({  contact, onClose }) => {
   const dialogRef = useRef(null);
@@ -32,7 +33,16 @@ const ContactPopup = ({  contact, onClose }) => {
           <strong>Notes:</strong> {contact.notes}
         </p>
       )}
-      <button onClick={onClose}>Close</button>
+     <Button
+        onClick={onClose}
+        sx={{
+          backgroundColor: "#1565C0",
+          color: "#fff",
+          marginLeft: 1,
+        }}
+      >
+        Close
+      </Button>
     </dialog>
   );
 };

@@ -3,7 +3,7 @@ import * as Yup from "yup";
 export const contactFormValidationSchema = Yup.object({
   name: Yup.string().required("Name is Required"),
   email: Yup.string()
-    .required("Email is required")
+    .required("Email is Required")
     .email("Use the correct email format")
     .matches(/^[^\s@]+@[^\s@]+\.[^\s@]+$/, "Use the correct email format")
     .matches(

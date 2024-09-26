@@ -7,7 +7,6 @@ import ContactTable from "./components/contactTable/Table";
 import ContactPopup from "./components/popUp/ContactPopup";
 import NotificationPopup from "./components/pop/NotificationPopup";
 
-
 const App = () => {
   const [currentContact, setCurrentContact] = useState(null);
   const [notification, setNotification] = useState(null);
@@ -40,7 +39,9 @@ const App = () => {
   };
   return (
     <div className="App">
-      <h1>Contact Management</h1>
+      <h1 style={{ color: "#696969", fontFamily: "Georgia"}}>
+        Contact Management
+      </h1>
       <ContactForm addContact={addContact} />
       <SearchBar onSearch={handleSearch} />
       <ContactTable
@@ -52,7 +53,10 @@ const App = () => {
         <ContactPopup contact={currentContact} onClose={handleClosePopup} />
       )}
       {notification && (
-        <NotificationPopup message={notification} onClose={handleCloseNotification} />
+        <NotificationPopup
+          message={notification}
+          onClose={handleCloseNotification}
+        />
       )}
     </div>
   );

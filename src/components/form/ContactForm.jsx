@@ -1,15 +1,32 @@
-import React from "react";
+import React, { useState } from "react"; 
 import { Formik, Form, Field } from "formik";
 import { contactFormValidationSchema } from "./validationSchemas";
 import "./ContactForm.css";
-import Select from "react-select";
-import customSelectStyles from "./customSelectStyles";
+import SelectField from "./SelectField"; 
+import { Button, Grid } from "@mui/material";
+import Loader from "./Loader";
 
 const ContactForm = ({ addContact, currentContact }) => {
+  const [loading, setLoading] = useState(false); 
   const options = [
     { value: "Personal", label: "Personal" },
     { value: "Business", label: "Business" },
   ];
+
+  const handleSubmit = async (values, { resetForm }) => {
+    setLoading(true); 
+    try {
+      await addContact({
+        ...values,
+        id: currentContact ? currentContact.id : null,
+      });
+      resetForm();
+    } catch (error) {
+      console.error("Error adding contact:", error);
+    } finally {
+      setLoading(false); 
+    }
+  };
 
   return (
     <div className="contact-form-card">
@@ -22,64 +39,79 @@ const ContactForm = ({ addContact, currentContact }) => {
           notes: currentContact ? currentContact.notes : "",
         }}
         validationSchema={contactFormValidationSchema}
-        onSubmit={(values, { resetForm }) => {
-          addContact({
-            ...values,
-            id: currentContact ? currentContact.id : null,
-          });
-          resetForm();
-        }}
+        onSubmit={handleSubmit} 
       >
-        {({ errors, touched, setFieldValue }) => (
+        {({ errors, touched }) => (
           <Form>
-            <Field
-              type="text"
-              name="name"
-              placeholder="Name"
-              className={touched.name && errors.name ? "error-border" : ""}
-            />
-            {touched.name && errors.name && (
-              <div className="error-message">{errors.name}</div>
-            )}
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <Field
+                  type="text"
+                  name="name"
+                  placeholder="Name"
+                  className={touched.name && errors.name ? "error-border" : ""}
+                />
+                {touched.name && errors.name && (
+                  <div className="error-message">{errors.name}</div>
+                )}
+              </Grid>
 
-            <Field
-              type="email"
-              name="email"
-              placeholder="Email"
-              className={touched.email && errors.email ? "error-border" : ""}
-            />
-            {touched.email && errors.email && (
-              <div className="error-message">{errors.email}</div>
-            )}
+              <Grid item xs={12}>
+                <Field
+                  type="email"
+                  name="email"
+                  placeholder="Email"
+                  className={touched.email && errors.email ? "error-border" : ""}
+                />
+                {touched.email && errors.email && (
+                  <div className="error-message">{errors.email}</div>
+                )}
+              </Grid>
 
-            <Select
-              name="contactType"
-              options={options}
-              placeholder="Select Contact Type"
-              isSearchable={false}
-              styles={customSelectStyles(
-                touched.contactType && errors.contactType
-              )}
-              onChange={(option) => setFieldValue("contactType", option.value)}
-            />
-            {touched.contactType && errors.contactType && (
-              <div className="error-message">{errors.contactType}</div>
-            )}
-            <Field
-              type="text"
-              name="jobTitle"
-              placeholder="Job Title"
-              className={
-                touched.jobTitle && errors.jobTitle ? "error-border" : ""
-              }
-            />
-            {touched.jobTitle && errors.jobTitle && (
-              <div className="error-message">{errors.jobTitle}</div>
-            )}
+              <Grid item xs={12}>
+                <SelectField fieldName="contactType" options={options} />
+              </Grid>
 
-            <Field as="textarea" name="notes" placeholder="Notes" />
+              <Grid item xs={12}>
+                <Field
+                  type="text"
+                  name="jobTitle"
+                  placeholder="Job Title"
+                  className={touched.jobTitle && errors.jobTitle ? "error-border" : ""}
+                />
+                {touched.jobTitle && errors.jobTitle && (
+                  <div className="error-message">{errors.jobTitle}</div>
+                )}
+              </Grid>
 
-            <button type="submit">Add Contact</button>
+              <Grid item xs={12}>
+                <Field
+                  as="textarea"
+                  name="notes"
+                  placeholder="Notes"
+                  className="notes-textarea" 
+                />
+              </Grid>
+
+              <Grid item xs={12}>
+                <Button
+                  type="submit"
+                  sx={{
+                    backgroundColor: "#1565C0",
+                    color: "#fff",
+                    marginLeft: 0,
+                    position: 'relative', 
+                  }}
+                  disabled={loading} 
+                >
+                  {loading ? (
+                    <Loader message="Adding Contact..." /> 
+                  ) : (
+                    "Add Contact"
+                  )}
+                </Button>
+              </Grid>
+            </Grid>
           </Form>
         )}
       </Formik>
