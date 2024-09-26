@@ -145,7 +145,7 @@ const ContactsTable = ({ contacts, handleDelete, onContactClick }) => {
                       sx={{
                         backgroundColor: "#1565C0",
                         color: "#fff",
-                        marginLeft: 1,
+                        marginLeft: 0,
                       }}
                     >
                       Delete
