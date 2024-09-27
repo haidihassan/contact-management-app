@@ -10,7 +10,7 @@ const NotificationPopup = ({ message, onClose }) => {
     }
   }, [message]);
 
-  const handleClose = (event, reason) => {
+  const handleClose = (reason) => {
     if (reason === "clickaway") {
       return;
     }
