@@ -27,25 +27,3 @@
     }
   }
   
-  .fade-out {
-    animation: fade-out 0.5s ease-in-out forwards;
-  }
-  
-  @keyframes fade-out {
-    from {
-      opacity: 1;
-    }
-    to {
-      opacity: 0;
-      transform: translateX(100%);
-    }
-  }
-  .fade-in {
-    opacity: 1;
-    transition: opacity 0.5s ease-in;
-  }
-  
-  .fade-out {
-    opacity: 0;
-    transition: opacity 0.5s ease-out;
-  }

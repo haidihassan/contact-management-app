@@ -1,33 +1,47 @@
-import React, { useEffect, useState } from 'react';
-import './NotificationPopup.css'; 
+import React, { useState, useEffect } from "react";
+import { Snackbar, Alert } from "@mui/material";
 
 const NotificationPopup = ({ message, onClose }) => {
-  const [isFadingOut, setIsFadingOut] = useState(false);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const startFadeOut = () => {
-      setIsFadingOut(true);
-    };
-
-    const timer = setTimeout(startFadeOut, 3000);
-
-    return () => clearTimeout(timer);
-  }, []);
-
-  const handleAnimationEnd = () => {
-    if (isFadingOut) {
-      onClose(); 
+    if (message) {
+      setOpen(true);
     }
+  }, [message]);
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpen(false);
+  };
+
+  const handleSnackbarExit = () => {
+    onClose();
   };
 
   return (
-    <div className={`notification-popup ${isFadingOut ? 'fade-out' : ''}`}
-    onAnimationEnd={handleAnimationEnd}>
-      <div className="notification-content">
-      
-        <p>{message}</p>
-      </div>
-    </div>
+    <Snackbar
+      open={open}
+      autoHideDuration={30000}
+      onClose={handleClose}
+      onExited={handleSnackbarExit}
+      anchorOrigin={{ vertical: "top", horizontal: "right" }}
+    >
+      <Alert
+        onClose={null}
+        severity="success"
+        sx={{
+          width: "1200",
+          backgroundColor: "#1565C0", 
+          color: "#fff",
+        }}
+        icon={false}  
+      >
+        {message}
+      </Alert>
+    </Snackbar>
   );
 };
 
