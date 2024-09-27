@@ -24,7 +24,7 @@ const NotificationPopup = ({ message, onClose }) => {
   return (
     <Snackbar
       open={open}
-      autoHideDuration={30000}
+      autoHideDuration={3000}
       onClose={handleClose}
       onExited={handleSnackbarExit}
       anchorOrigin={{ vertical: "top", horizontal: "right" }}
