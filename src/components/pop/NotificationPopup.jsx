@@ -5,18 +5,26 @@ const NotificationPopup = ({ message, onClose }) => {
   const [isFadingOut, setIsFadingOut] = useState(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
+    const startFadeOut = () => {
       setIsFadingOut(true);
-      setTimeout(() => {
-        onClose(); 
-      }, 500); 
-    }, 3000); 
-    return () => clearTimeout(timer); 
-  }, [message, onClose]);
+    };
+
+    const timer = setTimeout(startFadeOut, 3000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  const handleAnimationEnd = () => {
+    if (isFadingOut) {
+      onClose(); 
+    }
+  };
 
   return (
-    <div className={`notification-popup ${isFadingOut ? 'fade-out' : ''}`}>
+    <div className={`notification-popup ${isFadingOut ? 'fade-out' : ''}`}
+    onAnimationEnd={handleAnimationEnd}>
       <div className="notification-content">
+      
         <p>{message}</p>
       </div>
     </div>

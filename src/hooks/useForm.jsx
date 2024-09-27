@@ -15,33 +15,22 @@ const useForm = (setNotification) => {
     contact.jobTitle = capitalizeFirstLetter(contact.jobTitle);
     contact.notes = capitalizeFirstLetter(contact.notes || "");
 
-    if (contact.id) {
-      setContacts((prevContacts) => {
-        const updatedContacts = prevContacts.map((c) =>
-          c.id === contact.id ? contact : c
-        );
+    contact.id = Date.now();
+    setContacts((prevContacts) => {
+      const newContacts = [...prevContacts, contact];
 
-        localStorage.setItem("contacts", JSON.stringify(updatedContacts));
-        return updatedContacts;
-      });
-    } else {
-      contact.id = Date.now();
-      setContacts((prevContacts) => {
-        const updatedContacts = [...prevContacts, contact];
-
-        localStorage.setItem("contacts", JSON.stringify(updatedContacts));
-        return updatedContacts;
-      });
-      setNotification("Contact added successfully!");
-    }
+      localStorage.setItem("contacts", JSON.stringify(newContacts));
+      return newContacts;
+    });
+    setNotification("Contact added successfully!");
   };
 
   const handleDelete = (id) => {
     setContacts((prevContacts) => {
-      const updatedContacts = prevContacts.filter((c) => c.id !== id);
+      const newContacts = prevContacts.filter((c) => c.id !== id);
 
-      localStorage.setItem("contacts", JSON.stringify(updatedContacts));
-      return updatedContacts;
+      localStorage.setItem("contacts", JSON.stringify(newContacts));
+      return newContacts;
     });
     setNotification("Contact deleted!");
   };
