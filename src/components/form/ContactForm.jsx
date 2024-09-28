@@ -105,7 +105,7 @@ const ContactForm = ({ addContact, currentContact }) => {
                   disabled={loading} 
                 >
                   {loading ? (
-                    <Loader message="Adding Contact..." /> 
+                    <Loader message="Add Contact" /> 
                   ) : (
                     "Add Contact"
                   )}
